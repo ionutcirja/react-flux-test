@@ -1,0 +1,21 @@
+@import 'reset';
+@import 'variables';
+@import 'mixins';
+
+// components
+@import '../components/input/index';
+
+body {
+  font-family: $font-stack;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  color: $color-primary;
+}
+
+.container {
+  padding: 20px;
+
+  @include respond-to('small') {
+    padding: 40px;
+  }
+}
