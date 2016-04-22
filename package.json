@@ -19,6 +19,7 @@
     "express": "~4.13.4",
     "jasmine": "~2.4.1",
     "enzyme": "~2.2.0",
+    "react-addons-test-utils": "~15.0.1",
     "deep-freeze": "~0.0.1",
     "webpack": "~1.13.0",
     "webpack-dev-middleware": "~1.6.1",
