@@ -1,20 +1,26 @@
 import dispatcher from '../dispatcher'
 import { validate } from '../validation'
 import * as actionTypes from '../constants/action-types'
+import fieldsStore from '../stores/fields'
 
-export function addSubmission(data) {
+export function addSubmission() {
 
-    const validateFields = validate(data);
+    const fields = fieldsStore.getState().fields;
+    const submission = fields.reduce((result, item) => {
+        result[item.name] = item.value;
+        return result;
+    }, {});
+    const validateFields = validate(submission);
 
     if (validateFields.isValid) {
 
         dispatcher.dispatch({
-            type: actionTypes.REMOVE_ALL_ERRORS
+            type: actionTypes.ADD_SUBMISSION,
+            submission: submission
         });
 
         dispatcher.dispatch({
-            type: actionTypes.ADD_SUBMISSION,
-            submission: data
+            type: actionTypes.CLEAN_FIELDS
         });
     } else {
 
