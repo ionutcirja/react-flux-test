@@ -36,14 +36,20 @@ function setErrors(fields, errors) {
         if (errorIndexes.indexOf(index) < 0) {
             return Object.assign({}, {...item}, {error: ''});
         } else {
-            return Object.assign({}, {...item}, {error: errors[item.name]});
+            return Object.assign({}, {...item}, {error: errors[item.name]}, {value: ''});
         }
     });
 }
 
-function removeAllErrors(fields) {
+function setFieldValue(fields, field) {
     return fields.map((item) => {
-        return Object.assign({}, {...item}, {error: ''});
+        return item.name === field.name ? Object.assign({}, {...item}, {value: field.value}) : item;
+    });
+}
+
+function cleanFields(fields) {
+    return fields.map((item) => {
+        return Object.assign({}, {...item}, {error: ''}, {value: ''});
     });
 }
 
@@ -56,10 +62,16 @@ dispatcher.register((action) => {
             FieldsStore.emitChange();
             break;
 
-        case actionTypes.REMOVE_ALL_ERRORS:
-            fields = removeAllErrors(fields);
+        case actionTypes.CLEAN_FIELDS:
+            fields = cleanFields(fields);
             FieldsStore.emitChange();
             break;
+
+        case actionTypes.SET_FIELD_VALUE:
+            fields = setFieldValue(fields, action.field);
+            FieldsStore.emitChange();
+            break;
+
     }
 });
 

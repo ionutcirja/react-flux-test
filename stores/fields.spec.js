@@ -55,7 +55,42 @@ describe('Fields Store', () => {
         expect(Store.emitChange).toHaveBeenCalled();
     });
 
-    it('should remove all fields error if a REMOVE_ALL_ERRORS action is dispatched and emit the change', () => {
+    it('should set a field value if a SET_FIELD_VALUE action is dispatched and emit the change', () => {
+        const expectedState = [
+            {
+                name: 'advertiser',
+                label: 'Advertiser',
+                placeholder: '',
+                value: 'some value',
+                error: 'Some error'
+            },
+            {
+                name: 'brand',
+                label: 'Brand',
+                placeholder: '',
+                value: '',
+                error: ''
+            },
+            {
+                name: 'product',
+                label: 'Product',
+                placeholder: '',
+                value: '',
+                error: 'Another error'
+            }
+        ];
+        dispatcher.dispatch({
+            type: 'SET_FIELD_VALUE',
+            field: {
+                name: 'advertiser',
+                value: 'some value'
+            }
+        });
+        expect(Store.getState().fields).toEqual(expectedState);
+        expect(Store.emitChange).toHaveBeenCalled();
+    });
+
+    it('should reset all fields errors and values if a CLEAN_FIELDS action is dispatched and emit the change', () => {
         const expectedState = [
             {
                 name: 'advertiser',
@@ -80,16 +115,9 @@ describe('Fields Store', () => {
             }
         ];
         dispatcher.dispatch({
-            type: 'VALIDATION_ERROR',
-            errors: {
-                advertiser: 'Some error',
-                product: 'Another error'
-            }
-        });
-        dispatcher.dispatch({
-            type: 'REMOVE_ALL_ERRORS'
+            type: 'CLEAN_FIELDS'
         });
         expect(Store.getState().fields).toEqual(expectedState);
-        expect(Store.emitChange).toHaveBeenCalledTimes(2);
+        expect(Store.emitChange).toHaveBeenCalled();
     });
 });
