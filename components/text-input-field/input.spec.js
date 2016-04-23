@@ -1,5 +1,6 @@
 import React from 'react'
 import TextInputField from './index'
+import * as actions from '../../actions/fields'
 import { shallow } from 'enzyme'
 
 describe('TextInputField Component', () => {
@@ -35,12 +36,14 @@ describe('TextInputField Component', () => {
         expect(child.text()).toEqual('error message');
     });
 
-    it('should set state value when input onChange handler is called', () => {
+    it('should call setFieldValue action when onChange handler is called', () => {
+        spyOn(actions, 'setFieldValue');
+
         wrapper = shallow(<TextInputField name="product" value="p"/>);
         const handler = wrapper.find('input').props().onChange;
         expect(typeof handler).toEqual('function');
         handler({target: {value: 'new product'}});
-        expect(wrapper.state().value).toEqual('new product');
+        expect(actions.setFieldValue).toHaveBeenCalledWith('product', 'new product');
     });
 
     it('should clean state error when input onFocus handler is called', () => {
@@ -49,11 +52,6 @@ describe('TextInputField Component', () => {
         expect(typeof handler).toEqual('function');
         handler();
         expect(wrapper.state().error).toEqual('');
-    });
-
-    it('should return state value when getData method is called', () => {
-        wrapper = shallow(<TextInputField name="product" value="p"/>);
-        expect(wrapper.instance().getData()).toEqual('p');
     });
 
     it('should set state error on componentWillReceiveProps', () => {

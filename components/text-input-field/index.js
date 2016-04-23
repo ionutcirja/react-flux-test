@@ -1,35 +1,29 @@
 import React, { Component } from 'react'
+import { setFieldValue } from '../../actions/fields'
 
 class TextInputField extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.value,
             error: this.props.error
-        };
+        }
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
+        this.state = {
             error: nextProps.error
-        });
+        }
     }
 
     onChange(evt) {
-        this.setState({
-            value: evt.target.value
-        });
+        setFieldValue(this.props.name, evt.target.value);
     }
 
     onFocus() {
         this.setState({
             error: ''
         });
-    }
-
-    getData() {
-        return this.state.value;
     }
 
     render() {
@@ -42,13 +36,13 @@ class TextInputField extends Component {
                     name={this.props.name}
                     id={this.props.name}
                     placeholder={this.props.placeholder}
-                    value={this.state.value}
+                    value={this.props.value}
                     onChange={this.onChange.bind(this)}
                     onFocus={this.onFocus.bind(this)}
                 />
                 {
                     this.state.error &&
-                    <span className="form__input-error">{this.state.error}</span>
+                    <span className="form__input-error">{this.props.error}</span>
                 }
             </div>
         );
