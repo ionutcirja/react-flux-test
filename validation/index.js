@@ -6,7 +6,7 @@ export function validate(data) {
     const errors = {};
     Object.keys(data).forEach((key) => {
 
-        if(data[key].match(EMPTY_SPACES_REGEX)) {
+        if (data[key].match(EMPTY_SPACES_REGEX)) {
             errors[key] = EMPTY_SPACES_ERROR;
         }
     });
