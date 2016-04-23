@@ -15,15 +15,16 @@ function addSubmission(list, submission) {
 
     const duplicateItemIndex = findDuplicateSubmission(list, submission);
     const date = new Date();
+    const dateStr = date.toISOString().replace(/T/, ' ').replace(/\..*Z$/, '');
 
     if (!list.length || (list.length && duplicateItemIndex < 0)) {
-        return list.concat([Object.assign({}, {...submission, dates: [date.toISOString()]})]);
+        return list.concat([Object.assign({}, {...submission, dates: [dateStr]})]);
     }
 
     const duplicateItem = list[duplicateItemIndex];
     return list
         .slice(0, duplicateItemIndex)
-        .concat(Object.assign({}, {...duplicateItem}, {dates: duplicateItem.dates.concat([date.toISOString()])}))
+        .concat(Object.assign({}, {...duplicateItem}, {dates: duplicateItem.dates.concat([dateStr])}))
         .concat(list.slice(duplicateItemIndex + 1));
 }
 
