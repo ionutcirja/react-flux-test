@@ -1,12 +1,12 @@
 const EMPTY_SPACES_REGEX = /^\s+$|^$/gi;
 const EMPTY_SPACES_ERROR = 'Field is empty';
 
-export function validate(data) {
+export function validate(submission) {
 
     const errors = {};
-    Object.keys(data).forEach((key) => {
+    Object.keys(submission).forEach((key) => {
 
-        if (data[key].match(EMPTY_SPACES_REGEX)) {
+        if (submission[key].match(EMPTY_SPACES_REGEX)) {
             errors[key] = EMPTY_SPACES_ERROR;
         }
     });
