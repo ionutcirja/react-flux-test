@@ -4,6 +4,9 @@
 
 // components
 @import '../components/text-input-field/index';
+@import '../components/form/index';
+@import '../components/submitted-list/index';
+@import '../components/submitted-item/index';
 
 body {
   font-family: $font-stack;

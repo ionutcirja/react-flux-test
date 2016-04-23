@@ -6,8 +6,10 @@ $base-line-height: 16px;
 // colors
 $color-primary: #333333;
 $color-secondary: #666666;
-$color-error: #a00000;
+$color-red: #a00000;
+$color-red-light: #a33333;
 $color-grey: #cccccc;
+$color-white: #ffffff;
 
 // breakpoints
 $breakpoints: ('small':  768px, 'medium': 1024px) !default;

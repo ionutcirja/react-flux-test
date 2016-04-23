@@ -24,4 +24,11 @@
   &-container {
     margin-bottom: 25px;
   }
+
+  &-error {
+    display: block;
+    font-size: 1rem;
+    color: $color-red;
+    margin-top: 5px;
+  }
 }

@@ -4,11 +4,11 @@ class SubmittedItem extends Component {
 
     render() {
         return (
-            <li>
-                <div>{this.props.advertiser} <span>--></span></div>
-                <div>{this.props.brand} <span>--></span></div>
-                <div>{this.props.product} <span>--></span></div>
-                <ul>
+            <li className="submitted-item">
+                <div className="submitted-item__field">{this.props.advertiser} <span>--></span></div>
+                <div className="submitted-item__field">{this.props.brand} <span>--></span></div>
+                <div className="submitted-item__field">{this.props.product} <span>--></span></div>
+                <ul className="submitted-item__field">
                     {
                         this.props.dates.map((date, index) => {
                             return (

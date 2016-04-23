@@ -5,7 +5,7 @@ class SubmittedList extends Component {
 
     render() {
         return (
-            <ul>
+            <ul className="submitted-list">
                 {
                     this.props.submissions.map((submission, index) => {
                         return (
